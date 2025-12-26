@@ -30,7 +30,16 @@ jobs:
       run: pip install bandit
 
     - name: Run Bandit
-      run: bandit -r app --severity-level high
+      run: bandit -r api --severity-level high
+
+    ############################################
+    # Scan des dépendances Python (Safety)
+    ############################################
+    - name: Install Safety
+      run: pip install safety
+
+    - name: Dependency vulnerability scan
+      run: safety check -r requirements.txt
 
     # 🐳 Docker build
     - name: Build Docker image
